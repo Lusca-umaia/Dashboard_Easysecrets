@@ -25,6 +25,7 @@ interface EntradaVendas {
 interface VendasContextType {
   data: Venda[];
   dadoFormatado: EntradaVendas[];
+  dadoCompleto: EntradaVendas[];
   nomeProdutos: string[];
   melhorMes: EntradaVendas;
   quantidadeVendas: number;
@@ -109,6 +110,24 @@ export const VendasProvider = ({ children }: VendasProviderProps) => {
     });
   }, [data, mesesVendas, filtroProduto]);
 
+  const dadoCompleto = useMemo(() => {
+    return mesesVendas.map((mes) => {
+      const entrada: EntradaVendas = { mes, total: 0 };
+
+      data.forEach(({ vendas, produto }) => {
+        const produtoKey = produto.toLowerCase();
+
+        const vendaDoMes = vendas.find((venda) => venda.mes === mes);
+        const quantidadeVendida = vendaDoMes?.quantidade ?? 0;
+
+        entrada[produtoKey] = quantidadeVendida;
+        entrada.total += quantidadeVendida;
+      });
+
+      return entrada;
+    });
+  }, [data, mesesVendas]);
+
   const melhorMes = useMemo(() => {
     if (dadoFormatado.length === 0)
       return { mes: "Nenhum - sem vendas", total: 0 };
@@ -161,6 +180,7 @@ export const VendasProvider = ({ children }: VendasProviderProps) => {
         filtroProduto,
         handleChangeFilter,
         chartConfig,
+        dadoCompleto,
       }}
     >
       {children}

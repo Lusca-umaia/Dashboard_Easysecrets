@@ -2,6 +2,7 @@ import Topbar from "@/components/Topbar/Topbar";
 import StatCardWrapper from "@/components/StatCardWrapper/StatCardWrapper";
 import ChartsGuide from "@/components/ChartsGuide/ChartsGuide";
 import Header from "@/components/Header/Header";
+import TopProducts from "@/components/TopProducts/TopProducts";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Header />
         <StatCardWrapper />
         <ChartsGuide />
+        <TopProducts />
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./theme-provider";
+import { ThemeProvider } from "./themeProvider";
 import { VendasProvider } from "@/context/VendasContext";
 import FallbackWrapper from "@/components/FallbackWrapper/FallbackWrapper";
 
